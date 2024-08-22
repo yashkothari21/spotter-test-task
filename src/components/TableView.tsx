@@ -1,14 +1,10 @@
-import {
-	MaterialReactTable,
-	MRT_GlobalFilterTextField,
-	MRT_ToggleFiltersButton,
-	useMaterialReactTable,
-} from 'material-react-table'
+import { MaterialReactTable, useMaterialReactTable } from 'material-react-table'
 import { FC, useMemo, useState } from 'react'
 import { DateTime } from 'luxon'
-import { Box, IconButton, Skeleton, Stack } from '@mui/material'
+
 import { compareDates } from '../util/table'
-import { Cancel, Search } from '@mui/icons-material'
+import DataTableToolbar from './DataTableToolbar'
+import TableSkeleton from './TableSkeleton'
 
 interface TableViewProps {
 	tableData: {
@@ -95,23 +91,11 @@ const TableView: FC<TableViewProps> = ({
 		},
 		renderTopToolbar: () => {
 			return (
-				<Box
-					sx={{
-						display: 'flex',
-						gap: '0.5rem',
-						p: '8px',
-						justifyContent: 'space-between',
-						borderBottom: '0.5px solid lightgray',
-					}}
-				>
-					<Stack direction='row'>
-						{showSearch && <MRT_GlobalFilterTextField table={table} />}
-						<IconButton onClick={() => setShowSearch((prev) => !prev)}>
-							{showSearch ? <Cancel /> : <Search />}
-						</IconButton>
-					</Stack>
-					<MRT_ToggleFiltersButton table={table} />
-				</Box>
+				<DataTableToolbar
+					table={table}
+					setShowSearch={setShowSearch}
+					showSearch={showSearch}
+				/>
 			)
 		},
 		onColumnFiltersChange: setFilters,
@@ -144,17 +128,7 @@ const TableView: FC<TableViewProps> = ({
 		autoResetAll: true,
 	})
 
-	return loading ? (
-		<>
-			<Box sx={{ width: '50%', textAlign: 'center', margin: '0 auto' }}>
-				<Skeleton sx={{ bgcolor: '#ffffff1a' }} />
-				<Skeleton animation='wave' sx={{ bgcolor: '#ffffff36' }} />
-				<Skeleton animation={false} sx={{ bgcolor: '#ffffff7a' }} />
-			</Box>
-		</>
-	) : (
-		<MaterialReactTable table={table} />
-	)
+	return loading ? <TableSkeleton /> : <MaterialReactTable table={table} />
 }
 
 export default TableView

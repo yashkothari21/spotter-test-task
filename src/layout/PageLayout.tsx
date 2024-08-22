@@ -18,15 +18,14 @@ import { PropsWithChildren, useState } from 'react'
 const drawerWidth = 240
 const navItems = ['Data Table']
 
-const PageLayout = ({ children, window }: PropsWithChildren) => {
+const PageLayout = ({ children }: PropsWithChildren) => {
 	const [mobileOpen, setMobileOpen] = useState(false)
 
 	const handleDrawerToggle = () => {
 		setMobileOpen((prevState) => !prevState)
 	}
 
-	const container =
-		window !== undefined ? () => window().document.body : undefined
+	const container = () => window.document.body
 
 	const drawer = (
 		<Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
@@ -96,7 +95,6 @@ const PageLayout = ({ children, window }: PropsWithChildren) => {
 				</Drawer>
 			</nav>
 			<Box component='main' sx={{ width: '100vw', boxSizing: 'border-box' }}>
-				<Toolbar />
 				<Box sx={{ p: 3 }}>{children}</Box>
 			</Box>
 		</Box>
