@@ -95,7 +95,7 @@ const PageLayout = ({ children }: PropsWithChildren) => {
 				</Drawer>
 			</nav>
 			<Box component='main' sx={{ width: '100vw', boxSizing: 'border-box' }}>
-				<Box sx={{ p: 3 }}>{children}</Box>
+				<Box sx={{ p: 3, marginTop: 10 }}>{children}</Box>
 			</Box>
 		</Box>
 	)

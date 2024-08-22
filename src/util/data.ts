@@ -65,7 +65,7 @@ export const useCarrierData = () => {
 							width: 150,
 							type: 'string',
 						})) || []
-				console.log('🚀 ~ useEffect ~ headers:', headers)
+
 				setColumns(headers)
 
 				setLoading(false)

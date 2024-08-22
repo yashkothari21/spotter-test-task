@@ -5,6 +5,8 @@ import { DateTime } from 'luxon'
 import { compareDates } from '../util/table'
 import DataTableToolbar from './DataTableToolbar'
 import TableSkeleton from './TableSkeleton'
+import { Box } from '@mui/material'
+import DataTableChart from './TableChart'
 
 interface TableViewProps {
 	tableData: {
@@ -128,7 +130,23 @@ const TableView: FC<TableViewProps> = ({
 		autoResetAll: true,
 	})
 
-	return loading ? <TableSkeleton /> : <MaterialReactTable table={table} />
+	const dataTableChartData = useMemo(() => {
+		return table.getFilteredRowModel().rows.map((item) => item.original)
+	}, [table.getFilteredRowModel().rows])
+
+	return loading ? (
+		<TableSkeleton />
+	) : (
+		<>
+			<MaterialReactTable table={table} />
+
+			{parsedData.length > 0 && (
+				<Box sx={{ mt: 2 }}>
+					<DataTableChart chartData={dataTableChartData} />
+				</Box>
+			)}
+		</>
+	)
 }
 
 export default TableView
