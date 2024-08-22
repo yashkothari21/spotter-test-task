@@ -81,6 +81,7 @@ const DataTableChart: FC<any> = ({ chartData }) => {
 				border: '5px solid gray',
 				backgroundSize: '35px 35px',
 				backgroundImage: `linear-gradient(rgba(255,255,255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255, 0.1) 1px, transparent 1px)`,
+				marginTop: 8,
 			}}
 		/>
 	)

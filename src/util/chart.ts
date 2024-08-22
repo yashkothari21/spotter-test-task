@@ -10,9 +10,9 @@ interface MonthEntityCount {
 }
 
 interface ParsedData {
-	dateMonth?: string
-	dateYear?: string
-	dateWeek?: string
+	groupMonth?: string
+	groupYear?: string
+	groupWeek?: string
 }
 
 interface CountData {
@@ -39,13 +39,13 @@ const formatCountData = (countData: CountData, label: string) =>
 	}))
 
 export const getMonthWiseDataCount = (parsedData: ParsedData[]) =>
-	formatCountData(computeCountData(parsedData, 'dateMonth'), 'month')
+	formatCountData(computeCountData(parsedData, 'groupMonth'), 'month')
 
 export const getYearWiseDataCount = (parsedData: ParsedData[]) =>
-	formatCountData(computeCountData(parsedData, 'dateYear'), 'year')
+	formatCountData(computeCountData(parsedData, 'groupYear'), 'year')
 
 export const getWeekWiseDataCount = (parsedData: ParsedData[]) =>
-	formatCountData(computeCountData(parsedData, 'dateWeek'), 'week')
+	formatCountData(computeCountData(parsedData, 'groupWeek'), 'week')
 
 export const pivotChartData: Record<string, (data: ParsedData[]) => any[]> = {
 	Week: getWeekWiseDataCount,

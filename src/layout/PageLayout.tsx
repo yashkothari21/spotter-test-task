@@ -14,11 +14,16 @@ import {
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { PropsWithChildren, useState } from 'react'
+import { useTabContext } from '../context/tab'
 
 const drawerWidth = 240
-const navItems = ['Data Table']
+const navItems = [
+	{ lable: 'Data Table', key: 'data-table' },
+	{ lable: 'Pivot Table', key: 'pivot-table' },
+]
 
 const PageLayout = ({ children }: PropsWithChildren) => {
+	const { currentTab, changeTab } = useTabContext()
 	const [mobileOpen, setMobileOpen] = useState(false)
 
 	const handleDrawerToggle = () => {
@@ -30,14 +35,14 @@ const PageLayout = ({ children }: PropsWithChildren) => {
 	const drawer = (
 		<Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
 			<Typography variant='h6' sx={{ my: 2 }}>
-				TableView
+				TABLES
 			</Typography>
 			<Divider />
 			<List>
 				{navItems.map((item) => (
-					<ListItem key={item} disablePadding>
+					<ListItem key={item.key} disablePadding>
 						<ListItemButton sx={{ textAlign: 'center' }}>
-							<ListItemText primary={item} />
+							<ListItemText primary={item.lable} />
 						</ListItemButton>
 					</ListItem>
 				))}
@@ -63,12 +68,23 @@ const PageLayout = ({ children }: PropsWithChildren) => {
 						component='div'
 						sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
 					>
-						TableView
+						TABLES
 					</Typography>
 					<Box sx={{ display: { xs: 'none', sm: 'block' } }}>
 						{navItems.map((item) => (
-							<Button key={item} sx={{ color: '#fff' }}>
-								{item}
+							<Button
+								key={item.key}
+								sx={{
+									color: currentTab === item.key ? 'gray' : 'white',
+									backgroundColor:
+										currentTab === item.key ? 'white' : 'transparent',
+									marginLeft: 2,
+									fontWeight: currentTab === item.key ? 'bold' : 'normal',
+									outline: 'none',
+								}}
+								onClick={() => changeTab(item.key)}
+							>
+								{item.lable}
 							</Button>
 						))}
 					</Box>

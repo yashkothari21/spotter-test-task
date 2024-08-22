@@ -1,11 +1,14 @@
+import { TabProvider } from './context/tab'
 import PageLayout from './layout/PageLayout'
 import Page from './pages/Page'
 
 function App() {
 	return (
-		<PageLayout>
-			<Page />
-		</PageLayout>
+		<TabProvider>
+			<PageLayout>
+				<Page />
+			</PageLayout>
+		</TabProvider>
 	)
 }
 
