@@ -204,7 +204,7 @@ const TableView: FC<TableViewProps> = ({
 	useEffect(() => {
 		const params = new URLSearchParams()
 
-		filters.forEach((filter) => {
+		filters.forEach((filter: any) => {
 			params.append(filter.id, filter.value)
 		})
 

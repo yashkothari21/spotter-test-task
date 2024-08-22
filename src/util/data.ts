@@ -3,19 +3,8 @@
 import Papa from 'papaparse'
 import { useState, useEffect } from 'react'
 
-export interface CarrierData {
-	created_dt: string
-	data_source_modified_dt: string
-	entity_type: string
-	operating_status: string
-	legal_name: string
-	dba_name: string
-	physical_address: string
-	phone: string
-	usdot_number: string
-	mc_mx_ff_number: string
-	power_units: string
-	out_of_service_date: string
+type CarrierData = {
+	[key: string]: string
 }
 
 export const columnsMapper: CarrierData = {
@@ -61,7 +50,7 @@ export const useCarrierData = () => {
 						?.filter((key) => Object.keys(columnsMapper).includes(key))
 						.map((key) => ({
 							field: key,
-							headerName: columnsMapper[key],
+							headerName: columnsMapper[key] as string,
 							width: 150,
 							type: 'string',
 						})) || []
